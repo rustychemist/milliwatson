@@ -18,11 +18,11 @@ class OCR:
         self.cv_image_data = None
         self.logger = logging.getLogger(self.__class__.__name__)
         # All text boxes have the same left alignment
-        self.LEFT_ALIGN = 27
+        self.LEFT_ALIGN = 35
         # All text boxes have the same right alignment
-        self.WIDTH = 785 - self.LEFT_ALIGN
+        self.WIDTH = 835 - self.LEFT_ALIGN
         # All answer boxes have the same height
-        self.ANSWER_HEIGHT = 120
+        self.ANSWER_HEIGHT = 130
 
     def load_image(self, image_name, show=True):
         """Loads the image into memory
@@ -75,9 +75,9 @@ class OCR:
         """
         self.logger.info("Processing question")
         question_x = self.LEFT_ALIGN
-        question_y = 270
+        question_y = 300
         question_w = self.WIDTH
-        question_h = 700 - question_y
+        question_h = 600 - question_y
         result = self.run_ocr_on_image_section(
             question_x, question_y, question_w, question_h, show)
         return result
@@ -87,7 +87,7 @@ class OCR:
         """
         self.logger.info("Processing answer 1")
         answer_a_x = self.LEFT_ALIGN
-        answer_a_y = 705
+        answer_a_y = 610
         answer_a_w = self.WIDTH
         answer_a_h = self.ANSWER_HEIGHT
         result = self.run_ocr_on_image_section(
@@ -98,7 +98,7 @@ class OCR:
         """Returns the detected text within the second answer section of the image
         """
         self.logger.info("Processing answer 2")
-        answer_b_y = 845
+        answer_b_y = 750
         answer_b_h = self.ANSWER_HEIGHT
         answer_b_x = self.LEFT_ALIGN
         answer_b_w = self.WIDTH
@@ -110,7 +110,7 @@ class OCR:
         """Returns the detected text within the third answer section of the image
         """
         self.logger.info("Processing answer 3")
-        answer_c_y = 985
+        answer_c_y = 890
         answer_c_h = self.ANSWER_HEIGHT
         answer_c_x = self.LEFT_ALIGN
         answer_c_w = self.WIDTH
@@ -175,7 +175,7 @@ def main():
         description="Reads a single file and splits it\
          into question and answer options")
     arg_parser.add_argument("--input_file", "-i",
-                            help="The input file", default="capture_1.jpg")
+                            help="The input file")
     arg_parser.add_argument("--capture", "-c", action='store_true',
                             help="Capture the screen")
     arg_parser.add_argument("--save", "-s", help="Save the image")
@@ -188,7 +188,7 @@ def main():
         input_file = sanitize_file(args.input_file)
         ocr.load_image(input_file, show=True)
     if args.capture:
-        ocr.capture_screen(bbox=(0, 23, 494, 1000), show=True)
+        ocr.capture_screen(bbox=(0, 23, 438, 1000), show=True)
     if args.save:
         ocr.save_image(args.save)
 

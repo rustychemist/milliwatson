@@ -66,8 +66,8 @@ class MilliWatson:
             time.sleep(0.2)
 
     def capture(self):
-        # this is setup for iPhoneX
-        self.ocr.capture_screen(bbox=(0, 23, 405, 1000))
+        # this is setup for iPhone6S
+        self.ocr.capture_screen(bbox=(0, 23, 438, 1000))
 
     def process_capture(self):
         id = uuid.uuid1()
